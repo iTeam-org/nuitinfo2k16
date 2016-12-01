@@ -39,14 +39,27 @@ class NdiController extends AppController
      */
 
     public function index(){
+        $session = $this->request->session();
+        
+        if($session->read('user_id')){
 
+        }
+        else{
+            return $this->redirect(['controller' => 'Ndi', 'action' => 'home']);
+        }
     }
 
     public function home(){
+        $tickets = $this->loadModel("Tickets");
+        $tickets_json = $tickets->getTickets();
 
+        pr($tickets_json);
     }
 
     public function map(){
+        $tickets = $this->loadModel("Tickets");
+        $tickets_json = $tickets->getTickets();
 
+        pr($tickets_json);
     }
 }
