@@ -30,6 +30,7 @@ class CommentsFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'COMMENTS_FK_USER_ID' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'COMMENTS_FK_TICKET_ID' => ['type' => 'foreign', 'columns' => ['ticket_id'], 'references' => ['tickets', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -48,7 +49,7 @@ class CommentsFixture extends TestFixture
             'id' => 1,
             'user_id' => 1,
             'ticket_id' => 1,
-            'date' => '2016-12-01 22:54:48',
+            'date' => '2016-12-01 22:19:49',
             'message' => 'Lorem ipsum dolor sit amet'
         ],
     ];

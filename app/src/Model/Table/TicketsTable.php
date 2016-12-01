@@ -90,4 +90,11 @@ class TicketsTable extends Table
 
         return $rules;
     }
+
+    public function getTickets(){
+        $query=$this->find('all');
+        $tickets=$query->all();
+
+        return json_encode($tickets);
+    }
 }
