@@ -6,7 +6,7 @@
         ?>
         <div class='list'>
             <?php foreach($tickets as $ticket) { ?>
-            <div class='item col-lg-3 col-md-4 col-sm-6 col-sm-offset-0 col-xs-4 col-xs-offset-4 <?php echo "$ticket->getClass()" ?>'>
+            <div class='item col-lg-3 col-md-4 col-sm-6 col-sm-offset-0 col-xs-4 col-xs-offset-4 <?php echo "$model->getClass()" ?>'>
                 <div class='thumbnail'>
                     <img src='https://dummyimage.com/240x240' alt=''/>
                     <h3><?php echo $ticket->title; ?></h3>
