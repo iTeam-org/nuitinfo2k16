@@ -28,25 +28,36 @@ $cakeDescription = 'Solidr - NDI2016 iTeam';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('font-awesome.min.css') ?>
+    <?= $this->Html->meta(['link' => 'https://fonts.googleapis.com/css?family=Oswald', 'rel' => 'stylesheet']); ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
+    <nav class="navbar navbar-inverse" style="border-radius:0 !important;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/ndi/home">SOLIDR</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><?php echo $this->Html->link('Home',['controller'=>'Ndi','action'=>'home']);?></li>
+                    <li><?php echo $this->Html->link('Map', ['controller' => 'Ndi','action'=>'map']);?></li>
+                </ul>
+            </div>
         </div>
     </nav>
+
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
