@@ -1,4 +1,35 @@
 language: php
+
+dist: trusty
+
+sudo: false
+
 php:
-  - '5.6'
-  
+  - 7.0
+
+matrix:
+  fast_finish: true
+
+  include:
+    - php: 7.0
+      env: PHPCS=0
+
+before_script:
+  - if [[ $PHPCS = 1 ]]; then composer require cakephp/cakephp-codesniffer:~2.1; fi
+  - if [[ $PHPCS != 1 ]]; then composer install; fi
+  - if [[ $PHPCS != 1 ]]; then composer run-script post-install-cmd --no-interaction; fi
+
+script:
+  - if [[ $PHPCS != 1 ]]; then phpunit; fi
+  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP app/src app/tests app/config app/webroot; fi
+
+notifications:
+  email: false
+
+deploy:
+  provider: script
+  script: 
+    # Following line is crap. For a clean and secure ssh deploy maybe check https://oncletom.io/2016/travis-ssh-deploy/
+    - ssh debian@ && scripts/deploy.sh # Wouldn't it be nice to create a new 'prod' user ?
+  on:
+    branch: develop
