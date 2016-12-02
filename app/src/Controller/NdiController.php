@@ -76,11 +76,8 @@ class NdiController extends AppController
     }
 
     public function home(){
-        $votes = $this->loadModel("Votes");
-        $tickets = $this->loadModel("Tickets");
-        $tickets_json = $tickets->getTickets($votes);
-
-        $this->set('tickets_json', $tickets_json);
+        $tickets = $this->loadModel("Tickets")->getTickets();
+        $this->set('tickets', $tickets);
     }
 
     public function map(){

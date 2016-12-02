@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\TableRegistry;
 
 /**
  * Tickets Model
@@ -21,8 +23,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Ticket[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Ticket findOrCreate($search, callable $callback = null)
  */
-class TicketsTable extends Table
-{
+class TicketsTable extends Table {
 
     /**
      * Initialize method
@@ -30,8 +31,7 @@ class TicketsTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->table('tickets');
@@ -55,24 +55,23 @@ class TicketsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('title');
+                ->allowEmpty('title');
 
         $validator
-            ->allowEmpty('message');
+                ->allowEmpty('message');
 
         $validator
-            ->dateTime('date')
-            ->allowEmpty('date');
+                ->dateTime('date')
+                ->allowEmpty('date');
 
         $validator
-            ->allowEmpty('location');
+                ->allowEmpty('location');
 
         return $validator;
     }
@@ -84,24 +83,39 @@ class TicketsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
+    public function buildRules(RulesChecker $rules) {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }
 
-    public function getTickets($votes){
-        $query = $votes->find();
-        $query = $votes->find()
-            ->select(['ticket_id', 'count' => $query->func()->count('ticket_id')])
-            ->group('ticket_id');
-        $tickets=$query->all();
+    public function getTickets() {
+        $query = $this->find()
+                ->toArray();
+        return $query;
+    }
 
-        // $query=$this->find()->where(['ticket_id' => $ticket_id]);
-        // $query=$this->find('all');
-        // $tickets=$query->all();
+    public function getPositiveVotes($id) {
+        $this->Votes = TableRegistry::get('Votes');
+        return $this->Votes->countPositive($id);
+    }
 
-        return json_encode($tickets);
+    public function getNegativeVotes($id) {
+        $this->Votes = TableRegistry::get('Votes');
+        return $this->Votes->countNegative($id);
+    }
+
+    public function getLastComment($ticket) {
+        $this->Comments = TableRegistry::get('Comments');
+        $query = $this->Comments->find()
+                ->where(['ticket_id' => $ticket->id])
+                ->order(['date' => 'DESC'])
+                ->first();
+        return $query['message'];
+    }
+
+    public function getClass($id) {
+        $this->has_category = TableRegistry::get('has_category');
+        return $this->has_category->getClass($id);
     }
 }
