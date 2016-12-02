@@ -90,4 +90,17 @@ class NdiController extends AppController
 
         pr($tickets_json);
     }
+
+    public function addTicket(){
+        $session=$this->request->session();
+
+        $tickets=$this->loadModel("Tickets");
+        
+        if($this->request->data && $this->request->is('post')){
+            $tickets->addTicket($session, $this->request->data);
+        }
+
+        return $this->redirect(['controller' => 'ndi', 'action' => 'home']);
+
+    }
 }
