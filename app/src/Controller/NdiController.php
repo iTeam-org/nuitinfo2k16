@@ -19,6 +19,7 @@ use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 
+
 /**
  * Static content controller
  *
@@ -57,8 +58,11 @@ class NdiController extends AppController
     }
 
     public function map(){
+        
         $tickets = $this->loadModel("Tickets");
         $tickets_json = $tickets->getTickets();
+        
+        
 
         pr($tickets_json);
     }
