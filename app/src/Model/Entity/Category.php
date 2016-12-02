@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Category Entity
  *
  * @property int $id_category
- * @property int $category
+ * @property int|string $category
  */
 class Category extends Entity
 {
