@@ -98,3 +98,12 @@
                </div>
             </div>
        </div>
+       <div>
+          <?php
+            echo $this->Form->create(null,['url' => ['controller' => 'Ndi', 'action' => 'add_ticket']]);
+                echo $this->Form->input('title');
+                echo $this->Form->input('message');
+                echo $this->Form->button('Ajouter ticket',['class' => 'btn btn-sm-btn-info']);
+            echo $this->Form->end();
+          ?>
+       </div>

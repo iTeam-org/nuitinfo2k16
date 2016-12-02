@@ -6,6 +6,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\ORM\TableRegistry;
+
 /**
  * Tickets Model
  *
@@ -96,5 +98,25 @@ class TicketsTable extends Table
         $tickets=$query->all();
 
         return json_encode($tickets);
+    }
+
+    public function addTicket($session, $data){
+        $ticketsTable = TableRegistry::get('Tickets');
+        $ticket = $ticketsTable->newEntity();
+
+        $ticket->user_id = "2";
+        //$ticket->user_id = $session->read('user_id'); //normalement
+        $ticket->title = $data['title'];
+        $ticket->message = $data['message'];
+        $ticket->date = date("Y-m-d h:i:s");
+        $ticket->location = 'Paris';
+
+        if ($ticketsTable->save($ticket)) {
+            // The $article entity contains the id now
+            $id = $ticket->id;
+        }
+        else{
+
+        } 
     }
 }
