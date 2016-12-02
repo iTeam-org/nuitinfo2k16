@@ -1,23 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>nuitinfo2k16</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> 
-
-</head>
-
-<body>
-    <div class="container">
-        <header>
-            <h1> TOTO </h1>
-            <nav>
-
-            </nav>
-        </header> -->
         <?php
           echo $this->Html->css('bootstrap.min.css');
           echo $this->Html->css('style.css');
@@ -118,11 +98,3 @@
                </div>
             </div>
        </div>
-      <!--  <footer></footer>
-
-
-       <script src="js/jquery.js"></script>
-       <script src="js/bootstrap.min.js"></script>
-   </div>
-</body>
-</html>
