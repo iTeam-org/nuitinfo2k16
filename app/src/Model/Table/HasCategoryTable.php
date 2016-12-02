@@ -53,10 +53,4 @@ class HasCategoryTable extends Table
 
         return $validator;
     }
-    public function getClass($id) {
-        $query = $this->find()
-                ->where(['id' => $id]);
-        return $query->category;
-    }
 }
-
