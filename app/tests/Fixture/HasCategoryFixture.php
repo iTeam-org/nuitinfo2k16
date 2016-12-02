@@ -31,8 +31,8 @@ class HasCategoryFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id', 'id_category'], 'length' => []],
-            'CERTIFIED_FK_AcertifiedID' => ['type' => 'foreign', 'columns' => ['id'], 'references' => ['tickets', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'CERTIFIED_FK_EID' => ['type' => 'foreign', 'columns' => ['id_category'], 'references' => ['categories', 'id_category'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'CERTIFIED_FK_AcertifiedID' => ['type' => 'foreign', 'columns' => ['id'], 'references' => ['tickets', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
