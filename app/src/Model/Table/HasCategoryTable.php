@@ -60,4 +60,4 @@ class HasCategoryTable extends Table
         return $query->category;
     }
 }
-}
+

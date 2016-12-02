@@ -105,13 +105,9 @@ class TicketsTable extends Table {
         return $this->Votes->countNegative($id);
     }
 
-    public function getLastComment($ticket) {
+    public function getLastComment($id) {
         $this->Comments = TableRegistry::get('Comments');
-        $query = $this->Comments->find()
-                ->where(['ticket_id' => $ticket->id])
-                ->order(['date' => 'DESC'])
-                ->first();
-        return $query['message'];
+        return $this->Comments->getLastComment($id);
     }
 
     public function getClass($id) {

@@ -77,7 +77,9 @@ class NdiController extends AppController
 
     public function home(){
         $tickets = $this->loadModel("Tickets")->getTickets();
+        $model = $this->loadModel("Tickets");
         $this->set('tickets', $tickets);
+        $this->set('model', $model);
     }
 
     public function map(){

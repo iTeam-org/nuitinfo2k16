@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-3">
                                 <p style="color:green;">
-                                    <?php echo"$ticket->getPositiveVotes($ticket->id)";
+                                    <?php $vert = $model->getPositiveVotes($ticket->id); echo"$vert";
                                     ?>
                                 </p>
                             </div>
@@ -27,11 +27,11 @@
                                 </a>
                             </div>
                             <div class="col-xs-3 ">
-                               <p style="color:red;"><?php echo "$ticket->getNegativeVotes($ticket->id)"; ?></p>
+                               <p style="color:red;"><?php $rouge = $model->getNegativeVotes($ticket->id); echo"$rouge"; ?></p>
                            </div>
                        </div>
                    </div>
-                    <p><?php echo "$ticket->getClass($ticket->id)"; ?></p>
+                    <p><?php $msg = $model->getLastComment($ticket->id); echo"$msg";; ?></p>
                </div>
             </div>
             <?php } ?>
