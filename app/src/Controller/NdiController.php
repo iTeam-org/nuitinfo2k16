@@ -13,6 +13,8 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
+use App\Controller\AppController;
+use Cake\Event\Event;
 
 use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
@@ -29,7 +31,6 @@ use Cake\View\Exception\MissingTemplateException;
  */
 class NdiController extends AppController
 {
-
     /**
      * Displays a view
      *
@@ -41,12 +42,35 @@ class NdiController extends AppController
 
     public function index(){
         $session = $this->request->session();
+        $this->loadModel('Users');
         
         if($session->read('user_id')){
-
-        }
-        else{
             return $this->redirect(['controller' => 'Ndi', 'action' => 'home']);
+        }
+        // else if($this->request->data && $this->request->is('post')){
+        //     /*Get authentification*/
+        //     $user=$this->Auth->identify();
+        //     if($user){
+        //         /*OPEN session*/
+        //         $this->set('title', 'Yes !');
+
+        //         $session->write('user_id',$user["id"]);
+
+        //         $session->write('connecte','oui');
+        //         $fighters = $this->Fighters->getMyFighters($user["id"]);
+        //         //Go to home page
+
+        //         return $this->redirect(['controller' => 'Homes', 'action' => 'index']);
+        //     }
+        //     else{
+        //         $this->Flash->error(__('Couldnt log in. Please, try again.'));
+        //         $this->set('title', 'No !');
+        //     }
+        // }
+        else{
+            $session->write('user_id', '1234');
+            return $this->redirect(['controller' => 'Ndi', 'action' => 'home']);
+            $this->set('title', 'Login please');
         }
     }
 
