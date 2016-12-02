@@ -78,4 +78,24 @@ class VotesTable extends Table
 
         return $rules;
     }
+    
+    public function countPositive($id) {
+        $query = $this->find()
+                ->select(['count' => $this->find()->func()->count('*')])
+                ->where(['ticket_id' => $id, 'type' => '1'])
+                ->group('ticket_id')
+                ->toArray();
+        if($query[0]->count)         return $query[0]->count;
+        else return 0;
+    }
+    
+    public function countNegative($id) {
+        $query = $this->find()
+                ->select(['count' => $this->find()->func()->count('*')])
+                ->where(['ticket_id' => $id, 'type' => '1'])
+                ->group('ticket_id')
+                ->toArray();
+        if($query[0]->count)         return $query[0]->count;
+        else return 0;
+    }
 }

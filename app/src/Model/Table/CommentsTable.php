@@ -81,4 +81,12 @@ class CommentsTable extends Table
 
         return $rules;
     }
+
+    public function getLastComment($id) {
+        $query = $this->find()
+                ->where(['ticket_id' => $id])
+                ->order(['date' => 'DESC'])
+                ->first();
+        return $query['message'];
+    }
 }

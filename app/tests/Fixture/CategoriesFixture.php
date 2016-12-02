@@ -18,7 +18,7 @@ class CategoriesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id_category' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'category' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'category' => ['type' => 'string', 'length' => 30, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id_category'], 'length' => []],
         ],
@@ -37,7 +37,7 @@ class CategoriesFixture extends TestFixture
     public $records = [
         [
             'id_category' => 1,
-            'category' => 1
+            'category' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }
