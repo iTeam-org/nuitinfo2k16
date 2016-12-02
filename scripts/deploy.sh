@@ -1,23 +1,24 @@
 #!/bin/bash
 
-WEBDIR=/var/www/
+set -e
 
-# Remove old save...
-if [[ -e $WEBDIR/ndi_old ]]; then
-    rm ${WEBDIR}/ndi_old
+cd /var/www/ndi
+
+if [[ -e nuitinfo2k16 ]];
+then
+    # backup
+    mv nuitinfo2k16 nuitinfo2k16_$(date '+%Y-%m-%d_%H:%M:%S')
 fi
 
-# ...and a create a new one
-cp -r ${WEBDIR}/ndi ${WEBDIR}/ndi_old
+# getting the new code
+git clone https://github.com/iTeam-org/nuitinfo2k16.git
 
-# Update new version (could be nice to use git tags and version branches of type appname-1.x)
-cd ./ndi/
-rm -r nuitinfo2k16
-git clone git@github.com:iTeam-org/nuitinfo2k16.git
-cd nuitinfo2k16/app/
-
-# Install dependencies
-composer install
+# install deps
+cd nuitinfo2k16
+git checkout integration_view
+cp ~/app.prod.php /var/www/ndi/nuitinfo2k16/app/config/app.default.php
+cd app
+composer install -n
 
 # To be used in config/app.php to disable debug mode
-export CAKE_PHPDEBUG 0
+export CAKE_PHPDEBUG=0
