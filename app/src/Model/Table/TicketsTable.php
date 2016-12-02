@@ -91,9 +91,16 @@ class TicketsTable extends Table
         return $rules;
     }
 
-    public function getTickets(){
-        $query=$this->find('all');
+    public function getTickets($votes){
+        $query = $votes->find();
+        $query = $votes->find()
+            ->select(['ticket_id', 'count' => $query->func()->count('ticket_id')])
+            ->group('ticket_id');
         $tickets=$query->all();
+
+        // $query=$this->find()->where(['ticket_id' => $ticket_id]);
+        // $query=$this->find('all');
+        // $tickets=$query->all();
 
         return json_encode($tickets);
     }
